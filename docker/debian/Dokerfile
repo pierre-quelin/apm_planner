@@ -1,0 +1,13 @@
+# Get the Debian image from Docker Hub
+FROM debian:stable
+
+# Update apps on the base image
+RUN apt-get -y update && apt-get install -y
+
+# Install the needed packages for building
+RUN apt-get -y install qt5-qmake qtbase5-dev qtbase5-dev-tools qtscript5-dev libqt5webkit5-dev libqt5serialport5-dev libqt5svg5-dev qml-module-qtquick2 libqt5serialport5-dev libqt5opengl5-dev qml-module-qtquick-controls git libsdl1.2-dev libsndfile1-dev flite1-dev libssl-dev libudev-dev libsdl2-dev python3-serial python3-pexpect
+
+WORKDIR /usr/src/apm_planner
+
+RUN qmake apm_planner.pro
+RUN make
